@@ -1,0 +1,23 @@
+﻿@model TravelPortalCMSApp.Models.Image  
+
+<div class="box-primary" style="display:none; border-radius: 25px;border: 2px solid #3C8DBC; padding: 20px; width: 500px;
+    height: 550px;" id="editImage">
+    <div class="box-header with-border">
+        <section id="editPackage">
+            <div class="box-body">
+                <img src="@Url.Action("EditImages","Admin", new { @id= Model.ImageID})" width="300" height="300" />
+                
+                <form method="post" enctype = "multipart/form-data" id="AddPackageForm" role="form" class="form-horizontal">
+                    <div class="form-group">
+                        <br/>
+                        @Html.Label("Photo", new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            <input type="file" id="Image_ID" name="upload" required="required" accept="image/*" />
+                            <>
+                        </div>
+                    </div>
+                 </form>   
+            </div>
+        </section>
+    </div>
+</div>

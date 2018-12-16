@@ -1,0 +1,17 @@
+﻿@{
+    var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString() ;
+
+    var controllerCase = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(controller);
+
+    string layout = "";
+    if (controllerCase  == "Admin")
+    {
+        layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        layout = "~/Views/Shared/_Layout.cshtml";
+    } 
+
+    Layout = layout;
+}

@@ -1,0 +1,216 @@
+﻿@using TravelPortalCMSApp.Models
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ApplicationDbContext db = new ApplicationDbContext();
+    var sliderlist = (from c in db.Sliders select c).ToList();
+    var bannerlist = (from c in db.banners select c).ToList();
+}
+
+@*<div class="container_12">
+    <div class="clear"></div>
+    <div class="grid_12">
+        <div class="YourTrip">
+                <a href="~/Views/Home/Index.cshtml">
+                    <img src="@Url.Content("~/images/logo.png")"/>
+                </a>
+         </div>
+    </div>
+</div>*@
+
+
+    <div class="slider_wrapper">
+        <div id="camera_wrap" class="">
+            @foreach (var item in sliderlist.OrderByDescending(x => x.sliderID).Take(3))
+            {
+                var imgsrc = @Url.Content("~/images/" + item.ImageUrl + "");
+                <div data-src="@imgsrc">
+                    <div class="caption fadeIn">
+                        <h2>@item.Title</h2>
+                        <div class="price">
+                            FROM
+                            <span>$@item.Cost</span>
+                        </div>
+                        <a href="#">LEARN MORE</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!--==============================Content=================================-->
+    <div class="content">
+        <div class="container_12">
+            @foreach (var item in bannerlist.OrderByDescending(x=>x.bannerID).Take(3))
+            {
+                <div class="grid_4">
+                    <div class="banner">
+                        <img src="@Url.Content("~/images/"+@item.ImageUrl+"")" alt="">
+                        <div class="label">
+                            <div class="title">@item.Title</div>
+                            <div class="price">FROM<span>$ @item.Cost</span></div>
+                            <a href="#">LEARN MORE</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="clear"></div>
+            <div class="grid_6">
+                <h3>Booking Form</h3>
+                <form id="bookingForm">
+                    <div class="fl1">
+                        <div class="tmInput">
+                            <input name="Name" placeHolder="Name:" type="text" data-constraints=''>
+                        </div>
+                        <div class="tmInput">
+                            <input name="Country" placeHolder="Country:" type="text" data-constraints=''>
+                        </div>
+                    </div>
+                    <div class="fl1">
+                        <div class="tmInput">
+                            <input name="Email" placeHolder="Email:" type="text" data-constraints=''>
+                        </div>
+                        <div class="tmInput mr0">
+                            <input name="Hotel" placeHolder="Hotel:" type="text" data-constraints=''>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <strong>Check-in</strong>
+                    <label class="tmDatepicker">
+                        <input type="text" name="Check-in" placeHolder='10/05/2014' data-constraints=''>
+                    </label>
+                    <div class="clear"></div>
+                    <strong>Check-out</strong>
+                    <label class="tmDatepicker">
+                        <input type="text" name="Check-out" placeHolder='20/05/2014' data-constraints='' />
+                    </label>
+                    <div class="clear"></div>
+                    <div class="tmRadio">
+                        <p>Comfort</p>
+                        <input name="Comfort" type="radio" id="tmRadio0" data-constraints='' checked="checked" />
+                        <span>Cheap</span>
+                        <input name="Comfort" type="radio" id="tmRadio1" data-constraints='' />
+                        <span>Standart</span>
+                        <input name="Comfort" type="radio" id="tmRadio2" data-constraints='' />
+                        <span>Lux</span>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="fl1 fl2">
+                        <em>Adults</em>
+                        <select name="Adults" class="tmSelect auto" data-class="tmSelect tmSelect2" data-constraints="">
+                            <option>1</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+                        <div class="clear"></div>
+                        <em>Rooms</em>
+                        <select name="Rooms" class="tmSelect auto" data-class="tmSelect tmSelect2" data-constraints="">
+                            <option>1</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+                    </div>
+                    <div class="fl1 fl2">
+                        <em>Children</em>
+                        <select name="Children" class="tmSelect auto" data-class="tmSelect tmSelect2" data-constraints="">
+                            <option>0</option>
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                        </select>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="tmTextarea">
+                        <textarea name="Message" placeHolder="Message" data-constraints=''></textarea>
+                    </div>
+                    <a href="#" class="btn" data-type="submit">Submit</a>
+                </form>
+            </div>
+            <div class="grid_5 prefix_1">
+                <h3>Welcome</h3>
+                <img src="~/images/page1_img1.jpg" alt="" class="img_inner fleft">
+                <div class="extra_wrapper">
+                    <p>Lorem ipsum dolor sit ere amet, consectetur ipiscin.</p>
+                    In mollis erat mattis neque facilisis, sit ametiol
+                </div>
+                <div class="clear cl1"></div>
+                <p>Proin pharetra luctus diam, a scelerisque eros convallis </p>
+                <h4>Clients’ Quotes</h4>
+                <blockquote class="bq1">
+                    <img src="~/images/page1_img2.jpg" alt="" class="img_inner noresize fleft">
+                    <div class="extra_wrapper">
+                        <p>Duis massa elit, auctor non pellentesque vel, aliquet sit amet erat. Nullam eget dignissim nisi, aliquam feugiat nibh. </p>
+                        <div class="alright">
+                            <div class="col1">Miranda Brown</div>
+                            <a href="#" class="btn">More</a>
+                        </div>
+                    </div>
+                </blockquote>
+            </div>
+            <div class="grid_12">
+                <h3 class="head1">Latest News</h3>
+            </div>
+            <div class="grid_4">
+                <div class="block1">
+                    <time datetime="2014-01-01">10<span>Jan</span></time>
+                    <div class="extra_wrapper">
+                        <div class="text1 col1"><a href="#">Aliquam nibh</a></div>
+                        Proin pharetra luctus diam, any scelerisque eros convallisumsan. Maecenas vehicula egestas
+                    </div>
+                </div>
+            </div>
+            <div class="grid_4">
+                <div class="block1">
+                    <time datetime="2014-01-01">21<span>Jan</span></time>
+                    <div class="extra_wrapper">
+                        <div class="text1 col1"><a href="#">Etiam dui eros</a></div>
+                        Any scelerisque eros vallisumsan. Maecenas vehicula egestas natis. Duis massa elit, auctor non
+                    </div>
+                </div>
+            </div>
+            <div class="grid_4">
+                <div class="block1">
+                    <time datetime="2014-01-01">15<span>Feb</span></time>
+                    <div class="extra_wrapper">
+                        <div class="text1 col1"><a href="#">uamnibh Edeto</a></div>
+                        Ros convallisumsan. Maecenas vehicula egestas venenatis. Duis massa elit, auctor non
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    @*<div class="jumbotron">
+            <h1>ASP.NET</h1>
+            <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+            <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Getting started</h2>
+                <p>
+                    ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                    enables a clean separation of concerns and gives you full control over markup
+                    for enjoyable, agile development.
+                </p>
+                <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Get more libraries</h2>
+                <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+                <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Web Hosting</h2>
+                <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+                <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+            </div>
+        </div>*@

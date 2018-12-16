@@ -1,0 +1,48 @@
+﻿@using TravelPortalCMSApp.Models
+@model IEnumerable<TravelPortalCMSApp.Models.PackagesModel>
+@{
+    ViewBag.Title = "Edit Packages";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Packages List
+        @*<small>Optional description</small>*@
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <table class="table">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Id</th>
+                <th>Package Name</th>
+                <th>Cost</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.PackageID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PackageName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Cost)</td>
+                    <td>                    
+                        @Html.ActionLink("Details", "Details", new { id = item.PackageID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.PackageID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>

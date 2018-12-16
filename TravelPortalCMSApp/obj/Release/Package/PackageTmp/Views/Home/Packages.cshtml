@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Object>
+@{
+    List<TravelPortalCMSApp.Models.PackagesModel> listPackages = Model.ToList()[0] as List<TravelPortalCMSApp.Models.PackagesModel>;
+    List<TravelPortalCMSApp.Models.Image> listImages = Model.ToList()[1] as List<TravelPortalCMSApp.Models.Image>;
+    ViewBag.Title = "Packages";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="content">
+             <div class="container_12">
+                        @foreach (var image in listImages)
+                        {
+                <div class="grid_4">
+                    <div class="banner">
+                                <img src="data:image;base64,@System.Convert.ToBase64String(image.Content)" width="300" height="364" alt="image">
+                                @{
+                                    var lastImage = listImages.Last();
+                                    if (image == lastImage)
+                                    {
+                                        break;
+                                    }
+                                }
+                               @foreach (var package in listPackages)
+                                {
+                                    <div class="label">
+                                        <div class="title">@package.PackageName</div>
+                                        <div class="price">FROM<span>@package.Cost</span></div>
+                                        <a href="#">LEARN MORE</a>
+                                    </div>
+                                }
+                    </div>
+                </div>
+                         }
+                <div class="clear"></div>
+    </div>
+</div>
